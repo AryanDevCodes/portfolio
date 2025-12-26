@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* Light Mode - Warm Tones */
+    --background: 35 30% 97%;
+    --foreground: 25 25% 15%;
+
+    --card: 35 25% 94%;
+    --card-foreground: 25 25% 15%;
+
+    --popover: 35 25% 94%;
+    --popover-foreground: 25 25% 15%;
+
+    --primary: 25 85% 50%;
+    --primary-foreground: 35 30% 97%;
+
+    --secondary: 35 20% 88%;
+    --secondary-foreground: 25 25% 25%;
+
+    --muted: 35 15% 90%;
+    --muted-foreground: 25 15% 45%;
+
+    --accent: 25 85% 50%;
+    --accent-foreground: 35 30% 97%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 35 30% 97%;
+
+    --border: 35 20% 85%;
+    --input: 35 20% 85%;
+    --ring: 25 85% 50%;
+
+    --radius: 0.5rem;
+
+    /* Custom tokens - Light */
+    --gradient-primary: linear-gradient(135deg, hsl(25 85% 50%), hsl(35 80% 55%));
+    --gradient-card: linear-gradient(180deg, hsl(35 25% 96%), hsl(35 25% 92%));
+    --glow-primary: 0 0 60px hsl(25 85% 50% / 0.15);
+    --glow-subtle: 0 0 30px hsl(25 85% 50% / 0.08);
+
+    --font-display: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  .dark {
+    /* Dark Mode - Cool Cyan/Teal */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 175 84% 45%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 40% 85%;
+
+    --muted: 222 30% 12%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 175 84% 45%;
+    --accent-foreground: 222 47% 6%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 30% 16%;
+    --input: 222 30% 16%;
+    --ring: 175 84% 45%;
+
+    /* Custom tokens - Dark */
+    --gradient-primary: linear-gradient(135deg, hsl(175 84% 45%), hsl(190 80% 40%));
+    --gradient-card: linear-gradient(180deg, hsl(222 47% 10%), hsl(222 47% 6%));
+    --glow-primary: 0 0 60px hsl(175 84% 45% / 0.2);
+    --glow-subtle: 0 0 30px hsl(175 84% 45% / 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: var(--font-display);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight;
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-subtle {
+    box-shadow: var(--glow-subtle);
+  }
+
+  .border-gradient {
+    border: 1px solid transparent;
+    background: linear-gradient(hsl(var(--background)), hsl(var(--background))) padding-box,
+                var(--gradient-primary) border-box;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: var(--glow-subtle); }
+    50% { box-shadow: var(--glow-primary); }
+  }
+
+  .theme-transition {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+}
