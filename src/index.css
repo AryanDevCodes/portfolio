@@ -4,6 +4,27 @@
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+/* Colored Scrollbar Styles (global) */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #18181b;
+}
+::-webkit-scrollbar-thumb {
+  background: #6366f1;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #818cf8;
+}
+::-webkit-scrollbar-corner {
+  background: #18181b;
+}
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6366f1 #18181b;
+}
+
 @layer base {
   :root {
     /* Light Mode - Warm Tones */

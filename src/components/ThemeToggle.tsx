@@ -3,7 +3,14 @@ import { Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, mounted } = useTheme();
+
+  // Avoid hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return (
+      <div className="p-2 rounded-lg bg-secondary w-[34px] h-[34px]" />
+    );
+  }
 
   return (
     <button

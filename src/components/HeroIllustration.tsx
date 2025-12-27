@@ -102,16 +102,16 @@ export function HeroIllustration() {
   ];
 
   return (
-    <div ref={containerRef} className="relative w-full h-[600px] flex items-center justify-center overflow-hidden">
+    <div ref={containerRef} className="relative w-full h-[600px] flex items-center justify-center overflow-visible bg-transparent">
 
-      {/* Background blobs */}
+      {/* Background blobs - now transparent/removed to blend with page */}
       <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-cyan-400/20 blur-3xl"
+        className="absolute w-[400px] h-[400px] rounded-full bg-transparent blur-3xl"
         animate={{ scale: [1, 1.2, 1], x: [0, 50, 0], y: [0, -30, 0], rotate: [0, 90, 0] }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute w-[350px] h-[350px] rounded-full bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 blur-3xl"
+        className="absolute w-[350px] h-[350px] rounded-full bg-transparent blur-3xl"
         animate={{ scale: [1.2, 1, 1.2], x: [0, -40, 0], y: [0, 40, 0], rotate: [90, 0, 90] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />

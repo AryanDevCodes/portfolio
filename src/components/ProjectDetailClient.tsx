@@ -251,9 +251,35 @@ export function ProjectDetailClient({ project }: { project: Project }) {
                 </div>
                 <h2 className="text-2xl font-bold text-foreground">Architecture</h2>
               </div>
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                {project.architecture}
-              </p>
+              <div className="text-muted-foreground leading-relaxed text-lg space-y-6">
+                {project.architecture.split('\n\n').map((section, index) => {
+                  const lines = section.split('\n');
+                  const header = lines[0];
+                  const items = lines.slice(1);
+                  
+                  return (
+                    <div key={index} className="space-y-3">
+                      {header.startsWith('**') ? (
+                        <h3 className="text-lg font-semibold text-foreground">
+                          {header.replace(/\*\*/g, '')}
+                        </h3>
+                      ) : (
+                        <p>{header}</p>
+                      )}
+                      {items.length > 0 && (
+                        <ul className="space-y-2 ml-4">
+                          {items.map((item, i) => (
+                            <li key={i} className="flex items-center gap-2">
+                              <span className="text-primary">•</span>
+                              <span className="flex-1">{item.replace(/^• /, '')}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </AnimatedSection>
         </div>
