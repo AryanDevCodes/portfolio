@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Twitter, Facebook, Linkedin, Send, Share, Quote, Share2 } from 'lucide-react';
+import { Twitter, Facebook, Linkedin, Send, Share, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 
