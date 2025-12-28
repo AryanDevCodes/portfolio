@@ -36,7 +36,6 @@ export function QuoteShare({ blogTitle, blogUrl }: QuoteShareProps) {
           const rightMargin = window.innerWidth >= 1280 ? 320 : 16; // 320px for xl TOC, else 16px
           if (x < popupWidth / 2) x = popupWidth / 2 + 8;
           if (x > window.innerWidth - rightMargin - popupWidth / 2) x = window.innerWidth - rightMargin - popupWidth / 2 - 8;
-          // Clamp Y
           if (y < popupHeight) y = rect.bottom + popupHeight;
           setPosition({ x, y });
           setShowPopup(true);
