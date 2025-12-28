@@ -34,7 +34,7 @@ export default function BlogDetail() {
     const foundBlog = allBlogs.find((b) => b.slug === slug);
     setBlog(foundBlog);
     setLoading(false);
-  }, [slug]);
+  }, [slug, allBlogs]);
 
   if (loading) {
     return (

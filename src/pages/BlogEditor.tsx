@@ -354,7 +354,7 @@ More content...`}
                         key={image.id}
                         className="flex items-center gap-2 p-2 border rounded-lg hover:bg-secondary/50"
                       >
-                        <img
+                        <Image
                           src={image.dataUrl}
                           alt={image.name}
                           className="w-12 h-12 object-cover rounded"
