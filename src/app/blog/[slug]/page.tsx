@@ -2,12 +2,11 @@ import React from "react";
 import { blogs } from "@/lib/blogs";
 import type { Metadata } from "next";
 
-// 1️⃣ BlogDetail component
-type BlogDetailProps = {
-  slug: string;
+type PageProps = {
+  params: Promise<{ slug: string }>;
 };
 
-const BlogDetail: React.FC<BlogDetailProps> = ({ slug }) => {
+const BlogDetail = ({ slug }: { slug: string }) => {
   const blog = blogs.find((b) => b.slug === slug);
 
   if (!blog) return <div>Blog not found</div>;
@@ -20,28 +19,20 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ slug }) => {
   );
 };
 
-// 2️⃣ Metadata generation
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const blog = blogs.find((b) => b.slug === params.slug);
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
 
-  if (!blog) {
-    return {
-      title: "Blog | Aryan Raj",
-      description: "Read the latest blog posts and articles",
-    };
-  }
+  const blog = blogs.find((b) => b.slug === slug);
 
   return {
-    title: `${blog.title} | Aryan Raj`,
-    description: blog.description,
+    title: blog ? `${blog.title} | Aryan Raj` : "Blog | Aryan Raj",
+    description: blog?.description ?? "Read the latest blog posts",
   };
 }
 
-// 3️⃣ Page component
-export default function Page({ params }: { params: { slug: string } }) {
-  return <BlogDetail slug={params.slug} />;
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
+  return <BlogDetail slug={slug} />;
 }
