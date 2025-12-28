@@ -1,10 +1,6 @@
-// app/blog/page.tsx
-import dynamic from 'next/dynamic';
-import type { Metadata } from 'next';
 
-// Dynamically import the client-side Blogs component
-// to avoid "use client" errors in the server component
-const Blogs = dynamic(() => import('@/pages/Blogs'), { ssr: false });
+import type { Metadata } from 'next';
+import Blogs from '@/pages/Blogs';
 
 export const metadata: Metadata = {
   title: "Blog | Aryan Raj - Backend Engineering Insights",
