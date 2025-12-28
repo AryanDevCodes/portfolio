@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Mail, Github, Linkedin, MapPin, Phone, Send, Download, Sparkles, Zap, Globe } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";

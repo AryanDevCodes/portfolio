@@ -1,10 +1,21 @@
-import BlogDetail from "@/pages/BlogDetail";
+import React from "react";
+
+type BlogDetailProps = {
+  slug: string;
+};
+
+const BlogDetail: React.FC<BlogDetailProps> = ({ slug }) => {
+  // Your component logic here
+  return (
+    <div>
+      {/* Render blog details using the slug */}
+      <h1>Blog Detail for: {slug}</h1>
+    </div>
+  );
+};
 import { blogs } from "@/lib/blogs";
 import type { Metadata } from "next";
 
-type Props = {
-  params: { slug: string };
-};
 
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -21,6 +32,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function BlogDetailPage() {
-  return <BlogDetail />;
+export default function BlogDetailPage({ params }: { params: { slug: string } }) {
+  return <BlogDetail slug={params.slug} />;
 }

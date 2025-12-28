@@ -15,6 +15,7 @@ import { isAuthenticated, saveBlog, getStoredBlogs } from '@/lib/blog-storage';
 import { uploadImage, getStoredImages, deleteImage, formatFileSize, type StoredImage } from '@/lib/image-storage';
 import type { Blog } from '@/lib/blogs';
 import Link from 'next/link';
+import Image from "next/image";
 
 export default function BlogEditor() {
   const router = useRouter();
@@ -356,6 +357,13 @@ More content...`}
                         <img
                           src={image.dataUrl}
                           alt={image.name}
+                          className="w-12 h-12 object-cover rounded"
+                        />
+                        <Image
+                          src={image.dataUrl}
+                          alt={image.name}
+                          width={48}
+                          height={48}
                           className="w-12 h-12 object-cover rounded"
                         />
                         <div className="flex-1 min-w-0">
