@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { Button } from './ui/button';
+import Image from 'next/image';
 
 interface Testimonial {
   name: string;
@@ -54,11 +55,13 @@ export function TestimonialsCarousel({ testimonials }: TestimonialsCarouselProps
             <div className="flex items-center gap-4">
               {current.image && (
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <img 
-                    src={current.image} 
-                    alt={current.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
+                    <Image
+                      src={current.image}
+                      alt={current.name}
+                      width={48}
+                      height={48}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
                 </div>
               )}
               <div>

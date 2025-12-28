@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Tag, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Blog } from '@/lib/blogs';
 
 interface BlogCardProps {
@@ -31,11 +32,14 @@ export function BlogCard({ blog }: BlogCardProps) {
         {/* Cover Image */}
         {blog.coverImage && (
           <div className="aspect-video overflow-hidden bg-secondary">
-            <img
-              src={blog.coverImage}
-              alt={blog.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
+              <Image
+                src={blog.coverImage}
+                alt={blog.title}
+                fill
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority={true}
+              />
           </div>
         )}
 

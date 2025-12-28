@@ -1,6 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, Tag, ArrowLeft, Github, X, ZoomIn } from 'lucide-react';
@@ -243,13 +244,12 @@ export default function BlogDetail() {
                       onClick={() => setSelectedImage(image)}
                     >
                       <div className="relative aspect-[4/3] overflow-hidden bg-secondary/50">
-                        <img
+                        <Image
                           src={image.url}
                           alt={image.alt}
+                          fill
                           className="w-full h-full object-contain transition-transform group-hover:scale-105"
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
+                          sizes="(max-width: 768px) 100vw, 50vw"
                         />
                         {/* Zoom overlay */}
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
@@ -274,10 +274,12 @@ export default function BlogDetail() {
                     onClick={() => setSelectedImage({ url: blog.coverImage, alt: blog.title })}
                   >
                     <div className="relative aspect-[4/3] overflow-hidden bg-secondary/50">
-                      <img
+                      <Image
                         src={blog.coverImage}
                         alt={blog.title}
+                        fill
                         className="w-full h-full object-contain transition-transform group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
                         <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -323,10 +325,12 @@ export default function BlogDetail() {
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div className="w-[800px] aspect-[4/3] rounded-lg overflow-hidden shadow-2xl bg-black/30">
-                    <img
+                    <Image
                       src={selectedImage.url}
                       alt={selectedImage.alt}
+                      fill
                       className="w-full h-full object-contain"
+                      sizes="(max-width: 800px) 100vw, 800px"
                     />
                   </div>
                   {selectedImage.alt && (
