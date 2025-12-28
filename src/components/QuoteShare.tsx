@@ -33,7 +33,6 @@ export function QuoteShare({ blogTitle, blogUrl }: QuoteShareProps) {
           const popupHeight = 40; // estimate height of popup
           let x = rect.left + rect.width / 2;
           let y = rect.top - 10;
-          // Clamp X, and keep away from right edge/sidebar (e.g. 320px for TOC + scrollbar)
           const rightMargin = window.innerWidth >= 1280 ? 320 : 16; // 320px for xl TOC, else 16px
           if (x < popupWidth / 2) x = popupWidth / 2 + 8;
           if (x > window.innerWidth - rightMargin - popupWidth / 2) x = window.innerWidth - rightMargin - popupWidth / 2 - 8;
