@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Search, BookOpen } from 'lucide-react';
-import { useState } from 'react';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { BlogCard } from '@/components/BlogCard';
 import { blogs as defaultBlogs } from '@/lib/blogs';
@@ -10,9 +9,6 @@ import { getStoredBlogs } from '@/lib/blog-storage';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 
-export default function Blogs() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   // Merge default blogs with stored blogs on the server
   const storedBlogs = getStoredBlogs();
   const merged = [...storedBlogs, ...defaultBlogs];
@@ -20,24 +16,8 @@ export default function Blogs() {
   const allBlogs = merged.filter((blog, index, self) => 
     index === self.findIndex((b) => b.slug === blog.slug)
   );
-
-  // Get all unique tags
-  const allTags = Array.from(new Set(allBlogs.flatMap((blog) => blog.tags))).sort();
-
-  // Filter blogs based on search and tag
-  const filteredBlogs = allBlogs.filter((blog) => {
-    const matchesSearch =
-      searchQuery === '' ||
-      blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      blog.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      blog.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-
-    const matchesTag = selectedTag === null || blog.tags.includes(selectedTag);
-
-    return matchesSearch && matchesTag;
-  });
-
-  const featuredBlogs = filteredBlogs.filter((blog) => blog.featured);
+  // For server component, just render all blogs (no search/tag filtering)
+  const featuredBlogs = allBlogs.filter((blog) => blog.featured);
   const regularBlogs = filteredBlogs.filter((blog) => !blog.featured);
 
   return (
