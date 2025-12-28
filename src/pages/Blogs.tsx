@@ -1,5 +1,6 @@
+'use client';
 
-
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, BookOpen } from 'lucide-react';
 import { AnimatedSection } from '@/components/AnimatedSection';
@@ -9,17 +10,45 @@ import { getStoredBlogs } from '@/lib/blog-storage';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 
-  // Merge default blogs with stored blogs on the server
-  const storedBlogs = getStoredBlogs();
-  const merged = [...storedBlogs, ...defaultBlogs];
-  // Remove duplicates based on slug
-  const allBlogs = merged.filter((blog, index, self) => 
-    index === self.findIndex((b) => b.slug === blog.slug)
-  );
-  // For server component, just render all blogs (no search/tag filtering)
-  const featuredBlogs = allBlogs.filter((blog) => blog.featured);
+export default function Blogs() {
+  // --- State ---
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [allBlogs, setAllBlogs] = useState(defaultBlogs);
+
+  // --- Merge default and stored blogs ---
+  useEffect(() => {
+    const storedBlogs = getStoredBlogs();
+    const merged = [...storedBlogs, ...defaultBlogs];
+
+    // Remove duplicates by slug
+    const unique = merged.filter(
+      (blog, index, self) => index === self.findIndex((b) => b.slug === blog.slug)
+    );
+
+    setAllBlogs(unique);
+  }, []);
+
+  // --- Tags ---
+  const allTags = Array.from(new Set(allBlogs.flatMap((blog) => blog.tags))).sort();
+
+  // --- Filtered blogs ---
+  const filteredBlogs = allBlogs.filter((blog) => {
+    const matchesSearch =
+      searchQuery === '' ||
+      blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      blog.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      blog.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+
+    const matchesTag = selectedTag === null || blog.tags.includes(selectedTag);
+
+    return matchesSearch && matchesTag;
+  });
+
+  const featuredBlogs = filteredBlogs.filter((blog) => blog.featured);
   const regularBlogs = filteredBlogs.filter((blog) => !blog.featured);
 
+  // --- Render ---
   return (
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 max-w-7xl">
