@@ -1,8 +1,8 @@
-'use client';
+
 
 import { motion } from 'framer-motion';
 import { Search, BookOpen } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { BlogCard } from '@/components/BlogCard';
 import { blogs as defaultBlogs } from '@/lib/blogs';
@@ -13,18 +13,13 @@ import { Badge } from '@/components/ui/badge';
 export default function Blogs() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [allBlogs, setAllBlogs] = useState(defaultBlogs);
-
-  useEffect(() => {
-    // Merge default blogs with stored blogs
-    const storedBlogs = getStoredBlogs();
-    const merged = [...storedBlogs, ...defaultBlogs];
-    // Remove duplicates based on slug
-    const unique = merged.filter((blog, index, self) => 
-      index === self.findIndex((b) => b.slug === blog.slug)
-    );
-    setAllBlogs(unique);
-  }, []);
+  // Merge default blogs with stored blogs on the server
+  const storedBlogs = getStoredBlogs();
+  const merged = [...storedBlogs, ...defaultBlogs];
+  // Remove duplicates based on slug
+  const allBlogs = merged.filter((blog, index, self) => 
+    index === self.findIndex((b) => b.slug === blog.slug)
+  );
 
   // Get all unique tags
   const allTags = Array.from(new Set(allBlogs.flatMap((blog) => blog.tags))).sort();

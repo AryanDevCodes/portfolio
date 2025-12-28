@@ -27,7 +27,6 @@ export default function BlogDetail() {
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<{ url: string; alt: string } | null>(null);
   
-  // Merge default and stored blogs for use throughout component
   const storedBlogs = getStoredBlogs();
   const allBlogs = [...storedBlogs, ...defaultBlogs];
 
