@@ -42,6 +42,6 @@ export async function generateMetadata({
 }
 
 // 3️⃣ Page component
-export default function BlogDetailPage({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: { slug: string } }) {
   return <BlogDetail slug={params.slug} />;
 }
